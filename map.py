@@ -94,12 +94,14 @@ class Map:
             self.cells[cx][cy] = 5
 
 
-    def update_fires(self):
+    def update_fires(self, helico):
         for ri in range(self.h):
             for ci in range(self.w):
                 cell = self.cells[ri][ci]
                 if cell == 5:
                     self.cells[ri][ci] = 0
+                    if helico.score > 0:                    
+                        helico.score -= TREE_BONUS
         for i in range(10):
             self.add_fire()
 
@@ -122,6 +124,7 @@ class Map:
             helico.lives -= 1   
             if (helico.lives == 0):
                 helico.game_over()
+        
 
     def export_data(self):
         return {
